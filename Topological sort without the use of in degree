@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cout<<"Enter the number of vertices:"<<endl;
+    cin>>n;
+    int arr[n][n],i,j;
+    cout<<"Enter the adjacency matrix:"<<endl;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            cin>>arr[i][j];
+        }
+    }
+    int count=0,count_val=0,vis[n]={0};
+    while(count_val!=n)
+    {
+    for(i=0;i<n;i++)
+    {
+        count=0;
+        for(j=0;j<n;j++)
+        {
+            if(arr[j][i]==0)
+            {
+                count++;
+            }
+            else if(arr[j][i]==1)
+            {
+                count=0;
+                arr[j][i]=0;
+            }
+            if((count==n)&&(vis[i]!=1))
+            {
+                cout<<(i+1)<<" ";
+                vis[i]=1;
+                count=0;
+            }
+        }
+    }
+    count_val++;
+    }
+    return 0;
+}
