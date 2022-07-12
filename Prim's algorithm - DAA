@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n,i,j,k;
+    cout<<"Enter the number of vertices:"<<endl;
+    cin>>n;
+    int edges = n-1,adjacency_matrix[n][n],source=0;
+    cout<<"Enter the adjacency matrix:"<<endl;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            cin>>adjacency_matrix[i][j];
+        }
+    }
+    cout<<"Enter the source vertex:"<<endl;
+    cin>>source;
+    int visited[n]={0},unvisited[n],x=0,y=0,min_val = 0;
+    for(i=0;i<n;i++)
+    {
+        unvisited[i] = 1;
+    }
+    visited[source-1]=1,unvisited[source-1]=0;
+    for(i=0;i<edges;i++)
+    {
+        int min = 999;
+        for(j=0;j<n;j++)
+        {
+            if(visited[j]==1)
+            {
+                for(k=0;k<n;k++)
+                {
+                    if(unvisited[k]==1 && adjacency_matrix[j][k]!=999)
+                    {
+                        if(adjacency_matrix[j][k]<min)
+                        {
+                            min = adjacency_matrix[j][k];
+                            x = j, y = k;
+                        }
+                    }
+                }
+            }
+        }
+        visited[y] = 1, unvisited[y] = 0;
+        cout<<"Edge: "<<x<<"-"<<y<<" Weight: "<<min<<endl;
+        min_val+=min;
+    }
+    cout<<"The minimum cost of the spanning tree is: "<<min_val<<endl;
+    return 0;
+}
